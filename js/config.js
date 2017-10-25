@@ -4,16 +4,16 @@
  / __| |/ _ \/ _ \ |/ / |    / _ \ / _` |/ _` |
  \__ \ |  __/  __/   <| |___| (_) | (_| | (_| |
  |___/_|\___|\___|_|\_\______\___/ \__,_|\__,_|
-    version 2.04
+    version 2.1
 */
 
 /*URL for the server logo
 Leave it blank to use text instead*/
-var l_serverImage = "http://i.picresize.com/images/2015/07/23/YeSBP.png";
+var l_serverImage = "images/logo.png";
 
 /*Custom server name configuration
 Leave it blank for automatic server name*/
-var l_serverName = "Wonderland Role Play";
+var l_serverName = "Server name";
 
 /*Use a video for the background?
 Otherwise it will just use images*/
@@ -86,13 +86,11 @@ var l_musicDisplay = true;
 
 /*Music playlist
 Place how much Youtube IDs/.ogg you want*/
-var l_musicPlaylist = [
-        {youtube: "93ASUImTedo", name: "Latch - Disclosure"},
-	{youtube: "YqeW9_5kURI", name: "Lean On - (Dj Snake)"},
-        {youtube: "OSW2zeM3yLU", name: "Odd look - Kavinsky (The Weekend)"},
-        {youtube: "Tf1kGyppBVE", name: "I got you - Duke Demont"},
-        {youtube: "N-EXMpWuUr8", name: "You & Me - Disclosure (Flume remix)"}           
-];
+var l_musicPlaylist = "YOUTUBE_PLAYLIST";
+
+/*Api key
+Place your youtube api key*/
+var l_youtubeApi = "PLACE_YOUR_API_KEY_HERE";
 
 /*Random music order?*/
 var l_musicRandom = true;
@@ -106,13 +104,7 @@ var l_messagesEnabled = true;
 
 /*Enter your custom messages below*/
 var l_messages = [
-"Welcome to Wonderland Role Play!",
-"Make friends, follow rules & have fun!",
-"Be sure to visit our forums at WonderlandDarkRP.enjin.com!",
-"Wonderland Owners are, Lakoosha, Exhume & MissKitten",
-"Remember to be kind and respect others!",
-"Type !MOTD in your chat to view the rules!",
-"Donate to become a VIP member and have your own Custom Model and weapons!"
+"Welcome to our Server!"
 ];
 
 /*Random message order?*/
