@@ -150,38 +150,33 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-	youtubePlayer.setVolume(l_musicVolume);
-	if (youtubePlayer.isMuted()) youtubePlayer.unMute();
-	nextMusic();
+	$.getJSON( "https://www.googleapis.com/youtube/v3/playlistItems?fields=pageInfo(totalResults)&part=snippet&playlistId="+l_musicPlaylist+"&key="+l_youtubeApi, function( data ) {
+		var playlistLength = data.pageInfo.totalResults;
+		youtubePlayer.cuePlaylist({
+			'listType': 'playlist',
+			'list': l_musicPlaylist,
+			'index' : [Math.floor(Math.random() * playlistLength)]
+		});
+		setTimeout( function() { 
+			//event.target.stopVideo();
+			//event.target.playVideoAt(3);
+			if (youtubePlayer.isMuted()) youtubePlayer.unMute();
+			youtubePlayer.setVolume(l_musicVolume);
+			event.target.setShuffle(true); 
+			event.target.playVideo();
+			event.target.setLoop(true);
+			}, 
+		500);
+	});
 }
 
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.ENDED) {
-    	nextMusic();
-	}
-}
-
-function nextMusic() {
-	actualMusic++;
-
-	if (actualMusic >= l_musicPlaylist.length) {
-		actualMusic = 0;
-	}
-
-	var atual = l_musicPlaylist[actualMusic];
-
-	if (atual.youtube) {
-		youtubePlayer.loadVideoById(atual.youtube);
-	}else{
-		$("body").append('<audio src="'+atual.ogg+'" autoplay>');
-		$("audio").prop('volume', l_musicVolume/100);
-		$("audio").bind("ended", function() {
-			$(this).remove();
-			nextMusic();
+	if (event.data == YT.PlayerState.PLAYING) {
+		var id = event.target.getPlaylist()[event.target.getPlaylistIndex()];
+		$.getJSON( "https://www.googleapis.com/youtube/v3/videos?fields=items(snippet(title))&part=snippet&key="+l_youtubeApi+"&id="+id, function( data ) {
+			setMusicName(data.items[0].snippet.title);
 		});
 	}
-
-	setMusicName(atual.name);
 }
 
 function showMessage(message) {
